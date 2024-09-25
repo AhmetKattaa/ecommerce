@@ -1,0 +1,44 @@
+/* Odaklanan form elemanlarının kenarlık ve vurgu renkleri */
+.form-control:focus, 
+.btn:focus,
+input[type="date"]:focus {
+    border-color: #6C4035 !important; /* Kenarlık rengi */
+    box-shadow: 0 0 0 0.2rem rgba(108, 64, 53, 0.25) !important; /* Gölge efekti */
+    outline: none; /* Varsayılan mavi vurguyu kaldırma */
+}
+/* Metin seçildiğinde görünen arka plan ve yazı renkleri */
+::selection {
+    background: #6C4035; /* Seçim arka plan rengi */
+    color: #FFFFFF; /* Seçim yazı rengi */
+}
+
+::-moz-selection { /* Firefox için */
+    background: #6C4035;
+    color: #FFFFFF;
+}
+/* Takvim (date picker) için odak ve seçim stilleri */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(50%) sepia(30%) saturate(600%) hue-rotate(340deg);
+}
+
+input[type="date"] {
+    color-scheme: dark; /* Renk şemasını ayarlamak */
+}
+
+input[type="date"]:focus {
+    border-color: #6C4035 !important; /* Kenarlık rengi */
+    box-shadow: 0 0 0 0.2rem rgba(108, 64, 53, 0.25) !important; /* Gölge efekti */
+    outline: none; /* Varsayılan mavi vurguyu kaldırma */
+}
+
+input[type="date"]::-webkit-datetime-edit,
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-clear-button {
+    color: #6C4035; /* Yazı rengi */
+    background-color: transparent;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: #6C4035; /* Takvim simgesi rengi */
+    cursor: pointer;
+}

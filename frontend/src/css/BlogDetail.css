@@ -1,0 +1,111 @@
+/* Blog detail stil dosyası */
+
+/* Blog detay sayfasının container'ı */
+.blog-detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Başlık kısmı */
+  .blog-header {
+    text-align: center;
+    margin-bottom: 20px;
+    border: none; /* Border çizgileri kaldırıldı */
+  }
+  
+  .blog-title {
+    font-size: 40px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .blog-author-date {
+    font-size: 14px;
+    color: #777;
+    margin-top: 10px;
+  }
+  
+  .blog-author {
+    color: #333;
+    font-weight: bold;
+  }
+  
+  /* Blog içeriği */
+  .blog-content {
+    line-height: 1.8;
+    font-size: 18px;
+    color: #333;
+    padding: 20px 0;
+  }
+  
+  .blog-content p {
+    margin-bottom: 20px;
+  }
+  
+  .blog-content h2, .blog-content h3 {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  .blog-content img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    display: block;
+    border: none;
+  }
+  
+  /* Blog resmi */
+  .blog-image {
+    margin: 20px 0;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  /* Related blogs (You should also read) */
+  .related-blogs {
+    margin-top: 50px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+  }
+  
+  .related-blogs h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .related-blog-list {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .related-blog-item {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .related-blog-item img {
+    max-width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .related-blog-item p {
+    font-size: 16px;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .related-blog-item p:hover {
+    text-decoration: underline;
+  }
+  

@@ -1,0 +1,13 @@
+footer {
+    background-color: #6C4035 !important;
+    color: white;
+}
+
+footer a {
+    color: white;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #FFD700; /* Hover rengi */
+}

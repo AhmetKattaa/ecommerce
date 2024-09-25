@@ -1,0 +1,30 @@
+body {
+    background-color: hsla(0, 0%, 25%, 0.75);
+    align-items: center;
+    align-items: center;
+    justify-content: center;
+}
+h1,h2,h3,h4,h5,h6 {
+    color: rgba(255, 255, 255, 0.816);
+    font: bold;
+    border: 1px solid;
+    padding: 1px 5px;
+    align-items: center;
+    text-align: center;
+}
+ol {
+    padding: 0;
+}
+ol li {
+    text-decoration: none;
+    color: rgb(173, 49, 49);
+    background-color: #feffacbf;
+    padding: 2px;
+    margin-bottom: 5px;
+}
+button {
+    cursor: pointer;
+}
+text {
+    flex: 1 1 auto;
+}

@@ -1,0 +1,5 @@
+.modal-wide .modal-dialog {
+    width: 100vw; /* Ekran genişliğinin tamamını kaplasın */
+    max-width: 100%; /* Maksimum genişliği sınırsız yap */
+  }
+  
