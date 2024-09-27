@@ -54,7 +54,6 @@ const BlogList = () => {
 
   return (
     <Container className="my-4">
-      <h1 className="text-center mb-4">Blog Posts</h1>
       <Row>
         {blogs.map(blog => (
           <Col md={4} key={blog.id} className="mb-4">

@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProductCard from '../components/ProductCard';
+import BlogList from './BlogList';
 
 const Home = () => {
   return (
@@ -9,7 +10,7 @@ const Home = () => {
         <div className="container">
           <h1 className="display-4">Welcome to Prifa Coffee</h1>
           <p className="lead">Discover the best coffee from around the world</p>
-          <a href="/shop" className="btn btn-lg" style={{backgroundColor:"#6c4035"}}>Shop Now</a>
+          <a href="/products" className="btn btn-lg" style={{backgroundColor:"#6c4035"}}>Shop Now</a>
         </div>
       </section>
 
@@ -28,6 +29,13 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Blog Section */}
+      <section className='blog py-5'>
+        <h1 className="text-center mb-4">Blog Posts</h1>
+        <BlogList />
+      </section>
+
+      {/* Products */}
       <section className="products bg-light py-5">
         <div className="container">
           <h2 className="text-center mb-4">Our Products</h2>
