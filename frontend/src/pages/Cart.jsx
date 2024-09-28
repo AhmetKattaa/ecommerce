@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container, Table, Button, Alert } from 'react-bootstrap';
 import { useCart } from '../components/cart/CartContext';
-import ProductCard from '../components/ProductCard'; // Similar Products için ProductCard bileşenini kullanıyoruz.
 
 const Cart = () => {
   const { cartItems, removeFromCart, addToCart, clearCart, message, totalPrice } = useCart();
@@ -48,13 +47,13 @@ const Cart = () => {
                     <span>{item.name}</span>
                   </td>
                   <td className="text-center">
-                    {item.promotion_active === "1" ? (
+                    {item.promotion_active ? (
                       <>
                         <span style={{ textDecoration: 'line-through', marginRight: '10px' }}>
-                          {(parseFloat(item.price) / (1 - item.promotion_discount_percentage / 100)).toFixed(2)} $
+                          {parseFloat(item.original_price).toFixed(2)} $
                         </span>
                         <span style={{ color: 'red' }}>
-                          {item.price} $
+                          {parseFloat(item.price).toFixed(2)} $ {/* İndirimli fiyat */}
                         </span>
                       </>
                     ) : (
@@ -85,12 +84,6 @@ const Cart = () => {
             <Button variant="secondary" onClick={clearCart} className="mt-3">
               Clear Cart
             </Button>
-          </div>
-
-          {/* Similar Products Bölümü */}
-          <h3 className="mt-5 text-center">Similar Products</h3>
-          <div className="d-flex justify-content-center">
-            <ProductCard /> {/* Bu bölüm tüm ürünleri benzer ürünler olarak gösteriyor */}
           </div>
         </>
       ) : (

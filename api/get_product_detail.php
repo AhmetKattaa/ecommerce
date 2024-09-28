@@ -49,10 +49,20 @@ try {
     $stmtNutrition->execute([$id]);
     $product['nutrition'] = $stmtNutrition->fetchAll(PDO::FETCH_ASSOC);
 
-    // Promosyonu al
+    // Promosyonu al ve kontrol et
     $stmtPromo = $pdo->prepare("SELECT * FROM promotions WHERE product_id = ? AND active = 1");
     $stmtPromo->execute([$id]);
-    $product['promotion'] = $stmtPromo->fetch(PDO::FETCH_ASSOC);
+    $promotion = $stmtPromo->fetch(PDO::FETCH_ASSOC);
+
+    if ($promotion) {
+        // Eğer aktif bir promosyon varsa, indirim bilgilerini ekle
+        $product['promotion_active'] = true;
+        $product['promotion_discount_percentage'] = $promotion['discount_percentage'];
+    } else {
+        // Eğer aktif bir promosyon yoksa, default değerler
+        $product['promotion_active'] = false;
+        $product['promotion_discount_percentage'] = 0;
+    }
 
     // Quantities ve Flavors alanlarını JSON formatında decode et
     $product['quantities'] = json_decode($product['quantities'], true) ?: [];

@@ -8,23 +8,22 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const { addToCart } = useCart();
   const [selectedFlavor, setSelectedFlavor] = useState('');
-  const [showAlert, setShowAlert] = useState(false);  // Uyarı kontrolü
-  const [alertMessage, setAlertMessage] = useState('');  // Uyarı mesajı
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [quantity, setQuantity] = useState(1); // Sayaç için state
 
   useEffect(() => {
     fetch(`http://localhost/R/api/get_product_detail.php?id=${id}`)
       .then((response) => response.json())
       .then((data) => {
-        data.quantities = Array.isArray(data.quantities) ? data.quantities : [];
-        data.variants = Array.isArray(data.variants) ? data.variants : [];
-        data.flavors = Array.isArray(data.flavors) ? data.flavors : [];
+        console.log('Gelen ürün verisi:', data); // Gelen veriyi kontrol ediyoruz
         setProduct(data);
       })
       .catch((error) => console.error('Error fetching product:', error));
   }, [id]);
 
   const calculateDiscountedPrice = (price, discount) => {
-    return (price - (price * discount) / 100).toFixed(2);
+    return (price - (price * discount / 100)).toFixed(2);
   };
 
   const handleFlavorChange = (event) => {
@@ -32,20 +31,38 @@ const ProductDetail = () => {
   };
 
   const handleAddToCart = () => {
-    addToCart({
+    const finalPrice = product.promotion_active === true
+      ? calculateDiscountedPrice(product.price, product.promotion_discount_percentage)
+      : product.price;
+
+    // Sepete eklemeden önce güncel miktarı alalım
+    const cartItem = {
       id: product.id,
       name: product.name,
-      price: product.price,
+      price: finalPrice, // İndirimli fiyat
+      original_price: product.price, // Eski fiyat
       flavor: selectedFlavor,
       image: product.image,
       promotion_active: product.promotion_active,
-      promotion_discount_percentage: product.promotion_discount_percentage
-    });
+      promotion_discount_percentage: product.promotion_discount_percentage,
+      quantity: quantity, // Sayaçtaki miktar
+    };
 
-    // Uyarı mesajını ayarla ve göster
-    setAlertMessage(`${product.name} has been added to the cart!`);
+    addToCart(cartItem);
+
+    setAlertMessage(`${product.name} has been added to the cart with quantity ${quantity}!`);
     setShowAlert(true);
-    setTimeout(() => setShowAlert(false), 3000);  // Uyarıyı 3 saniye sonra gizle
+    setTimeout(() => setShowAlert(false), 3000);
+  };
+
+  const decreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const increaseQuantity = () => {
+    setQuantity(quantity + 1);
   };
 
   if (!product) {
@@ -59,7 +76,6 @@ const ProductDetail = () => {
           <img src={product.image} alt={product.name} className="img-fluid" />
         </Col>
         <Col md={6}>
-          {/* Sepete eklenme uyarısı */}
           {showAlert && (
             <Alert variant="success" onClose={() => setShowAlert(false)} dismissible>
               {alertMessage}
@@ -69,7 +85,8 @@ const ProductDetail = () => {
           <h1>{product.name}</h1>
           <p>{product.description}</p>
 
-          {product.promotion_active === "1" ? (
+          {/* İndirimli fiyat gösterimi */}
+          {product.promotion_active === true ? (
             <>
               <p><strong>Discounted Price:</strong> {calculateDiscountedPrice(product.price, product.promotion_discount_percentage)} $</p>
               <p style={{ textDecoration: 'line-through' }}><strong>Original Price:</strong> {product.price} $</p>
@@ -121,6 +138,13 @@ const ProductDetail = () => {
               ))}
             </Form.Group>
           )}
+
+          {/* Ürün sayacı */}
+          <div className="d-flex justify-content-center my-3">
+            <Button variant="light" onClick={decreaseQuantity}>-</Button>
+            <span style={{ padding: '0 10px' }}>{quantity}</span>
+            <Button variant="light" onClick={increaseQuantity}>+</Button>
+          </div>
 
           <Button variant="warning" className="mt-3" onClick={handleAddToCart}>
             Add to Cart

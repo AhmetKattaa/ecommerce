@@ -1,3 +1,9 @@
 img {
     color: #c1282b;
 }
+.sticky-top {
+    position: sticky;
+    top: 0;
+    z-index: 1020; /* Navbar'ın üstte kalmasını sağlamak için yüksek bir z-index kullan */
+}
+  
